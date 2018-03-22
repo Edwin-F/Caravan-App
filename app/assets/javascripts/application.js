@@ -80,11 +80,13 @@ $(document).ready(function()
 		$(".page-container .stop-partial").sortDomElements(function(a,b){
 	    akey = $(a).children('.line-tile').text();
 	    bkey = $(b).children('.line-tile').text();
-	    //check if integer or string or empty string like train lines
-	    aint = parseInt(akey)? parseInt(akey) :(/J14|X98|X49|X9/.test(akey))? 0.2:0;
-	    bint = parseInt(bkey)? parseInt(bkey) : (/J14|X98|X49|X9/.test(bkey))? 0.2:0;
-	    //Case to sort when both values are strings
-	    if(/J14|X98|X49|X9/.test(akey) && /J14|X98|X49|X9/.test(bkey)){
+	    //check if values are integer or string or empty string
+	    akeyRegex = /[a-zA-Z]./.test(akey); //checks values in the form of X94, but not 52A
+	    bkeyRegex = /[a-zA-Z]./.test(bkey);
+	    aint = parseInt(akey)? parseInt(akey) : (akeyRegex)? 0.2:0;
+	    bint = parseInt(bkey)? parseInt(bkey) : (bkeyRegex)? 0.2:0;
+	    //Case to sort when both values are non-empty strings
+	    if(akeyRegex && bkeyRegex){
 	    	aint = akey;
 	    	bint = bkey;
 	    }
