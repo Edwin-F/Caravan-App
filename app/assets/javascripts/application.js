@@ -61,4 +61,36 @@ $(document).ready(function()
 			});
 		});
 	});
+	//this code is for sort DOM elements by id or name
+	jQuery.fn.sortDomElements = function(comparator) {
+	  return Array.prototype.sort.call(this, comparator).each(function(i) {
+	    this.parentNode.appendChild(this);
+	  });
+	};
+	$("#toSortName").click(function (){
+		$(".page-container .stop-partial").sortDomElements(function(a,b){
+	    akey = $(a).children('span').text();
+	    bkey = $(b).children('span').text();
+	    if (akey == bkey) return 0;
+	    if (akey < bkey) return -1;
+	    if (akey > bkey) return 1;
+		});
+	});
+	$("#toSortId").click(function (){
+		$(".page-container .stop-partial").sortDomElements(function(a,b){
+	    akey = $(a).children('.line-tile').text();
+	    bkey = $(b).children('.line-tile').text();
+	    //check if integer or string or empty string like train lines
+	    aint = parseInt(akey)? parseInt(akey) :(/J14|X98|X49|X9/.test(akey))? 0.2:0;
+	    bint = parseInt(bkey)? parseInt(bkey) : (/J14|X98|X49|X9/.test(bkey))? 0.2:0;
+	    //Case to sort when both values are strings
+	    if(/J14|X98|X49|X9/.test(akey) && /J14|X98|X49|X9/.test(bkey)){
+	    	aint = akey;
+	    	bint = bkey;
+	    }
+	    if (aint == bint) return 0;
+	    if (aint < bint) return -1;
+	    if (aint > bint) return 1;
+		});
+	});
 });

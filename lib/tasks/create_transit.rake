@@ -209,8 +209,14 @@ namespace :transit do
     Line.import(tland_lines)
 
     # Import relationships - each pair is [stop_onestop_id, line_onestop_id]
-    values = tland_lines_stops.map{|pair| '("' + pair[0] + '","' + pair[1] + '")' }.join(',')
+    values = tland_lines_stops.map{|pair| '("' + pair[0] + '","' + pair[1] + '")' }.join("\n")
+
+    puts "values mapped finished"
+    File.open("myfile.rb", 'w') { |file| file.write(values) }
+    puts "write to myfile.rb finished"
+
     ActiveRecord::Base.connection.execute("INSERT INTO lines_stops (stop_onestop_id, line_onestop_id) VALUES #{values}")
+    puts "finished associations"
   end
 
   def delete_transit_data
