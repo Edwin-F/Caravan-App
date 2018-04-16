@@ -46,18 +46,4 @@ $(document).ready(function()
 
 	clickSort("#sort-name", ".page-container .stop-partial", "span");
 	clickSort("#sort-id", ".page-container .stop-partial", ".line-tile", 1);
-	/*
-
-	$("#sort-name").click( function () {
-		$("#sort-name,#sort-id").removeClass('active');
-		sortLineDom(".page-container .stop-partial",'span');
-		$(this).addClass('active');
-	});
-
-	$("#sort-id").click( function () {
-		$("#sort-name, #sort-id").removeClass('active');
-		sortLineDom(".page-container .stop-partial",'.line-tile',id=1)
-		$(this).addClass('active');
-	});*/
-
 });

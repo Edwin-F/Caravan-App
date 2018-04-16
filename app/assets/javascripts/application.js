@@ -61,5 +61,4 @@ $(document).ready(function()
 			});
 		});
 	});
-	//this code is for sorting DOM elements by id or name
 });
